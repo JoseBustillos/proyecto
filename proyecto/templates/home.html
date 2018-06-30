@@ -1,49 +1,57 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="./static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="./static/js/bootstrap.js">
 </head>
 <body>
 <h1>Agregar Estudiante </h1>
 <form method="POST" action="/">
-    <input type="text" name="id">
-    <input type="text" name="nombre">
-    <input type="text" name="apellido">
+    <input type="text" name="id" placeholder="Cedula">
+    <input type="text" name="nombre" placeholder="Nombre">
+    <input type="text" name="apellido" placeholder="Apellido">
     <input type="submit" value="Add" class="btn btn-outline-primary">
 </form>
 <h1>Estudiantes</h1>
 
-<table>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Cedula</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Eliminar</th>
+    </tr>
+    </thead>
+    <tbody>
     {% for estudiante in estudiantes %}
         <tr>
-            <!--<td>
-                <p>{{ estudiante.id }}</p>
-                <p>{{ estudiante.nombre }}</p>
-                <p>{{ estudiante.apellido }}</p>
-            </td>-->
-            <td>
-                <form method="POST" action="./update">
+            <form method="POST" action="./update">
+                <td class="btn btn-outline-danger">
                     <input type="hidden" value="{{ estudiante.id }}" name="oldId">
                     <input type="text" value="{{ estudiante.id }}" name="newId">
-
+                </td>
+                <td class="btn btn-outline-danger">
                     <input type="hidden" value="{{ estudiante.nombre }}" name="oldNombre">
                     <input type="text" value="{{ estudiante.nombre }}" name="newNombre">
-
+                </td>
+                <td class="btn btn-outline-danger">
                     <input type="hidden" value="{{ estudiante.apellido }}" name="oldApellido">
                     <input type="text" value="{{ estudiante.apellido }}" name="newApellido">
-                    <input type="submit" value="Update">
-                </form>
-            </td>
-            <td>
-                <form method="POST" action="./delete" style="display: inline">
+                    <input type="submit" class="btn btn-outline-dark" value="Actualizar">
+                </td>
+
+            </form>
+            <td class="btn btn-outline-danger">
+                <form method="POST" action="./delete">
                     <input type="hidden" value="{{ estudiante.id }}" name="id">
-                    <input type="hidden" value="{{ estudiante.nombre }}" name="nombre">
-                    <input type="hidden" value="{{ estudiante.apellido }}" name="apellido">
-                    <input type="submit" value="Delete">
+                    <input type="submit" class="btn btn-outline-dark" value="Delete">
                 </form>
             </td>
         </tr>
     {% endfor %}
+    </tbody>
 
 </table>
+<p><strong>Registrados:</strong> {{ numero }}</p>
 </body>
 </html>
